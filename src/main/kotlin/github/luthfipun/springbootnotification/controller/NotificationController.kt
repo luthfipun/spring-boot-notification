@@ -27,4 +27,17 @@ class NotificationController(
             message = "Waiting send notification event data with ${time.inWholeSeconds}s"
         )
     }
+
+    @GetMapping(
+        value = ["async"],
+        produces = ["application/json"]
+    )
+    fun asyncNotification(): WebResponse {
+        val time = measureTime {
+            notificationService.sendEventAsync()
+        }
+        return WebResponse(
+            message = "Waiting send notification event data with ${time.inWholeSeconds}s"
+        )
+    }
 }
