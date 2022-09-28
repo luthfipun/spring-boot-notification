@@ -40,4 +40,17 @@ class NotificationController(
             message = "Waiting send notification event data with ${time.inWholeSeconds}s"
         )
     }
+
+    @GetMapping(
+        value = ["coroutine"],
+        produces = ["application/json"]
+    )
+    fun coroutineNotification(): WebResponse {
+        val time = measureTime {
+            notificationService.sendEventCoroutine()
+        }
+        return WebResponse(
+            message = "Waiting send notification event data with ${time.inWholeSeconds}s"
+        )
+    }
 }
